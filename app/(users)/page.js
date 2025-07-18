@@ -24,7 +24,7 @@ export default function Home() {
            md:my-14 flex items-center justify-center"
           >
             {" "}
-            <h1 className="  md:text-7xl text-4xl font-serif ">
+            <h1 className=" mt-11 pb-3.5  md:text-7xl text-4xl font-serif ">
               Online IT Training
             </h1>
           </div>

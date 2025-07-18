@@ -4,7 +4,7 @@ const FeedBack = () => {
     <>
       <div>
         <div className="flex flex-col md:flex-row items-center justify-center">
-          <div>
+          <div className="flex flex-col items-center justify-center">
             <div className="bg-paraBg w-[70%] p-7 mt-8 mb-10 text-center">
               <h1 className="text-4xl">
                 <span className="text-blue-900">Feedback</span> Form
