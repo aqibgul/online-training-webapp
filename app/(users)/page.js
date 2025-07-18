@@ -17,7 +17,7 @@ import FeedBack from "@/components/feedback";
 export default function Home() {
   return (
     <>
-      <div className="mb-11">
+      <div className="mb-11 mx-6 ">
         <div className="container  mx-auto">
           <div
             className="container mx-auto font-bold text-heading sm:my-8
