@@ -16,6 +16,8 @@ const Card = ({ title, description, imgSrc }) => {
             alt="html"
             width={300}
             height={100}
+            // blurDataURL="/placeholder.png"
+            // placeholder="blur"
           />
         </div>
         <p className=" bg-paraBg rounded-2xl p-1.5 text-gray-900 mt-2  ">
