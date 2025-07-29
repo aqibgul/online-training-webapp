@@ -5,46 +5,54 @@ import React, { use, useEffect, useState } from "react";
 import { RiProfileFill, RiSearch2Fill } from "react-icons/ri";
 
 const Contact = () => {
-  const [name, setName] = useState("");
+  const [username, setName] = useState("");
   const [cnic, setCnic] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  const [courses, setCourses] = useState("");
-  const handleSubmit = async () => {
-    // e.preventDefault();
-    const response = await fetch("http://localhost:3000/registration", {
-      method: "POST",
+  const [course, setCourses] = useState("");
+  const handleSubmit = async (e) => {
+    // Prevent default form submission behavior
+    e?.preventDefault();
+    await fetch("http://localhost:5000/registration", {
+      method: ["POST"],
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name,
+        username,
         cnic,
         email,
         phone,
         password,
-        courses,
+        course,
       }),
-    });
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          console.log("Registration successful:", data.message);
+          alert("Registration successful! You can now log in.");
+        } else {
+          console.log("Registration failed:", data.message);
+        }
+      });
+    // Handle success or error messages as needed
 
-    const data = await response.json();
-    if (data.success) {
-      alert("Registration successful");
-      // Reset form fields
-      setName("");
-      setCnic("");
-      setEmail("");
-      setPhone("");
-      setPassword("");
-      setCourses("");
-    } else {
-      alert("Registration failed: " + data.message);
-    }
+    // Reset form fields
+    setName("");
+    setCnic("");
+    setEmail("");
+    setPhone("");
+    setPassword("");
+    setCourses("");
   };
+
   useEffect(() => {
     handleSubmit();
   }, []);
+
+  // Function to handle form submission
 
   return (
     <>
@@ -52,7 +60,7 @@ const Contact = () => {
         Registration{" "}
       </h1>
       <div className="bg-blue-50 p-2 container text-heading mx-auto flex flex-col md:flex-row justify-center items-center">
-        <form className="  w-[60%] mt-10">
+        <form onSubmit={handleSubmit} className="  w-[60%] mt-10">
           <div className="">
             <label className="block text-heading text-lg font-bold mb-1">
               Name
@@ -61,7 +69,8 @@ const Contact = () => {
             <input
               type="text"
               placeholder="Enter your name"
-              value={name}
+              value={username}
+              required
               onChange={(e) => setName(e.target.value)}
               className="shadow appearance-none border rounded md:w-[60%]
                py-2 px-3 text-black bg-paraBg leading-tight  focus:shadow-outline"
@@ -74,6 +83,7 @@ const Contact = () => {
               type="number"
               placeholder="Enter your cnic"
               value={cnic}
+              required
               onChange={(e) => setCnic(e.target.value)}
               className="shadow appearance-none border rounded md:w-[60%]
                py-2 px-3 text-black bg-paraBg leading-tight  focus:shadow-outline"
@@ -85,6 +95,7 @@ const Contact = () => {
               type="email"
               placeholder="Enter your email"
               value={email}
+              required
               onChange={(e) => setEmail(e.target.value)}
               className="shadow appearance-none border rounded md:w-[60%]
                py-2 px-3 text-black bg-paraBg leading-tight  focus:shadow-outline"
@@ -98,6 +109,7 @@ const Contact = () => {
               type="password"
               placeholder="Enter your name"
               value={password}
+              required
               onChange={(e) => setPassword(e.target.value)}
               className="shadow appearance-none border rounded md:w-[60%]
                py-2 px-3 text-black bg-paraBg leading-tight  focus:shadow-outline"
@@ -109,6 +121,7 @@ const Contact = () => {
             <input
               type="number"
               placeholder="Enter your phone number"
+              required
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               className="shadow appearance-none border rounded md:w-[60%]
@@ -122,7 +135,8 @@ const Contact = () => {
               type="text"
               rows="4"
               placeholder="Enter your courses"
-              value={courses}
+              required
+              value={course}
               onChange={(e) => setCourses(e.target.value)}
               className="shadow appearance-none border rounded md:w-[60%] 
                py-2 px-3 text-black bg-paraBg leading-tight  focus:shadow-outline"
